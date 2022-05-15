@@ -1,0 +1,91 @@
+openapi: 3.0.0
+
+info:
+  title: Federated Search Service API
+  description: API description.
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost'
+    description: local dev backend
+  - url: 'https://dev.courier-super-app.com'
+    description: dev env backend
+  - url: 'https://test.courier-super-app.com'
+    description: test env backend
+  - url: 'https://staging.courier-super-app.com'
+    description: staging env backend
+  - url: 'https://prod.courier-super-app.com'
+    description: prod env backend
+
+paths:
+  /geozones/add:
+    post:
+      tags: [ geozones ]
+      summary: Add a new geographical zone for delivery.
+      requestBody:
+        description: Input request parameters.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeozoneCreate'
+
+      responses:
+        '200':
+          description: Ok.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 331763514647511104
+
+  /geozones/update:
+    post:
+      tags: [ geozones ]
+      summary: Update the geographical zone with new available courier.
+      requestBody:
+        description: Input request parameters.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeozoneUpdate'
+
+      responses:
+        '200':
+          description: Ok.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 331763514647511104
+components:
+  schemas:
+    GeozoneCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+
+      example:
+        name: "Central"
+        coordinates: [[1.6665, 3.5553], [11.23, 24.33]]
+
+    GeozoneUpdate:
+      type: object
+      properties:
+        courier_id:
+          type: number
+        district_id:
+          type: number
+
+      example:
+        courier_id: 331728760171659330
+        district_id: 331763514647511104
+
