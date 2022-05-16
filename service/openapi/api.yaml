@@ -59,6 +59,41 @@ paths:
               schema:
                 type: string
                 example: 331763514647511104
+
+  /geozones/getAvailableCourier:
+    post:
+      tags: [ geozones ]
+      summary: Return available courier for delivery and geozone by coordinates.
+      requestBody:
+        description: Input request parameters.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: number
+
+            example:
+              [1.554,6.333]
+
+      responses:
+        '200':
+          description: Ok.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  courier_id:
+                    type: number
+                  geozone_id:
+                    type: number
+
+                example:
+                  courier_id: 331728760171659330
+                  geozone_id: 331763514647511104
+
 components:
   schemas:
     GeozoneCreate:
@@ -82,10 +117,10 @@ components:
       properties:
         courier_id:
           type: number
-        district_id:
+        geozone_id:
           type: number
 
       example:
         courier_id: 331728760171659330
-        district_id: 331763514647511104
+        geozone_id: 331763514647511104
 
