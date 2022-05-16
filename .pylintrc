@@ -1,4 +1,3 @@
 [MASTER]
-disable=C0114
+disable=C0114, no-name-in-module
 max-line-length=120
-disable=no-name-in-module
